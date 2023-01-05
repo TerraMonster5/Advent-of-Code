@@ -1,0 +1,1 @@
+with open("input.txt","r") as file: floor = 0; [floor += 1 if char == "(" else floor -= 1 for char in file.readline().strip()]
