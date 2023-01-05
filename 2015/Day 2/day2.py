@@ -6,4 +6,8 @@ for box in boxes:
     total += min(box)
     for side in box:
         total += 2 * side
-print(total)
+
+bows = list(map(lambda dims:dims[0]*dims[1]*dims[2] + 2*sum(dims[:2]), list(map(sorted, lines))))
+totalRibon = sum(bows)
+
+print(total, totalRibon)
