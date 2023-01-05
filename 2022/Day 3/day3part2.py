@@ -1,0 +1,1 @@
+with open("input.txt","r") as file: lines = [line.strip() for line in file]; print(sum([ord(value)-38 if value.isupper() else ord(value)-96 for value in [next(iter(set(lines[x]).intersection(lines[x+1]).intersection(lines[x+2]))) for x in range(0,len(lines),3)]]))
