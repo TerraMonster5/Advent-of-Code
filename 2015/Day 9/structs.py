@@ -3,7 +3,7 @@ class Stack:
         self._array = []
     
     def __str__(self) -> str:
-        return f""
+        return f"Stack()"
 
     def push(self, val) -> None:
         self._array.append(val)
@@ -23,7 +23,7 @@ class Queue:
         self._array = []
     
     def __str__(self) -> str:
-        return f""
+        return f"Queue()"
     
     def enqueue(self,val) -> None:
         self._array.append(val)
