@@ -1,4 +1,4 @@
-with open("input.txt","r") as file: line = file.readline().strip()
+with open("input.txt", "r") as file: line = file.readline().strip()
 houses = {(0, 0) : 1}; currentS = [0, 0]; currentR = [0, 0]
 for count, char in enumerate(line):
     if count % 2:

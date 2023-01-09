@@ -1,4 +1,4 @@
-with open("input.txt","r") as file: line = file.readline().strip()
+with open("input.txt", "r") as file: line = file.readline().strip()
 houses = {(0, 0) : 1}; current = [0, 0]
 for char in line:
     if char == "^": current[0] += 1
