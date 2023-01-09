@@ -80,10 +80,10 @@ class Graph:
     def dijkstras(self, currentVertex: int, table=None) -> dict:
         if table is None:
             table = {
-                "vertex":self.vertices,
-                "distance":[None] * len(self.vertices),
-                "visited":[False] * len(self.vertices),
-                "previous":[None] * len(self.vertices)
+                "vertex": self.vertices,
+                "distance": [None] * len(self.vertices),
+                "visited": [False] * len(self.vertices),
+                "previous": [None] * len(self.vertices)
                 }
             table["distance"][currentVertex] = 0
             for vertex, cost in table["vertex"][currentVertex].adjacency.items():
