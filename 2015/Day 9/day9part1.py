@@ -1,18 +1,9 @@
-from structs import Graph
+from itertools import permutations
 
 with open("input.txt", "r") as file: lines = [line.strip().split() for line in file]
-refTable = tuple(dict.fromkeys(path[0] for path in lines))
-paths: dict = {}
-for line in lines:
-    if line[2] == "Arbre":
-        continue
-    elif line[0] in paths.keys():
-        paths[line[0]][refTable.index(line[2])] = int(line[-1])
-    else:
-        paths[line[0]] = {}
-        paths[line[0]][refTable.index(line[2])] = int(line[-1])
+refTable = {(path[0], path[2]): path[-1] for path in lines} | {(path[2], path[0]): path[-1] for path in lines}
 
-world = Graph()
+def calcDist(temp: list) -> int:
+    return 0
 
-for path in paths.values():
-    world.vertices.append(world.Vertex(path))
+routes = list(permutations(list(dict.fromkeys(path[0] for path in lines))+[lines[-1][2]]))
