@@ -7,3 +7,5 @@ def calcDist(temp: list) -> int:
     return 0
 
 routes = list(permutations(list(dict.fromkeys(path[0] for path in lines))+[lines[-1][2]]))
+
+print(routes)
