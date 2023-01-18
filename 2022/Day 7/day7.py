@@ -2,6 +2,15 @@ from structs import Stack
 
 dirs = {"/":[]}; pwd = Stack(); pwd.push("/")
 
+def calcSize(directory: str) -> int:
+    total = 0
+    for item in dirs[directory]:
+        if item.startswith("dir"):
+            total += calcSize(item.split()[1])
+        else:
+            total += int(item.split()[0])
+    return total
+
 with open("input.txt","r") as file:
     ls = False
     for count, line in enumerate(iter(file)):
@@ -25,5 +34,11 @@ while pwd.peek() != "/":
 
 print(dirs)
 
-for dir in dirs.keys():
-    pass
+bigTotal = 0
+
+for key in dirs.keys():
+    size = calcSize(key)
+    if size < 100000:
+        bigTotal += size
+
+print(bigTotal)
