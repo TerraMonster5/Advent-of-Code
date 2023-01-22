@@ -1,1 +1,0 @@
-with open("input.txt","r") as file: instructions = [int(line.strip()) for line in file]
