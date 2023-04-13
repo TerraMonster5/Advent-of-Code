@@ -12,7 +12,7 @@ def gate(pos: int):
         match gates[pos][1]:
             case "AND":
                 if gates[pos][0].isdigit():
-                    return int(gates[pos][0] & gate([x[-1] for x in gates].index(gates[pos][2])))
+                    return int(int(gates[pos][0]) & gate([x[-1] for x in gates].index(gates[pos][2])))
                 else:
                     return int(gate([x[-1] for x in gates].index(gates[pos][0])) & gate([x[-1] for x in gates].index(gates[pos][2])))
             case "OR":
