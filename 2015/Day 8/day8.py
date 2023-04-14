@@ -1,0 +1,1 @@
+with open("input.txt", "r") as file: strings = [line.strip() for line in file]
