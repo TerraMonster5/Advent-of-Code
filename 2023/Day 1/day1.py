@@ -2,7 +2,6 @@
 with open("input.txt", "r") as file: print(sum([int([x for x in line.rstrip() if x.isdigit()][0]+[x for x in line.rstrip() if x.isdigit()][-1]) for line in file]))
 
 # Part 2
-import re
 numstrings = ("one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
 nums = ("1", "2", "3", "4", "5", "6", "7", "8", "9")
 with open("input.txt", "r") as file: lines = [line.rstrip() for line in file]
