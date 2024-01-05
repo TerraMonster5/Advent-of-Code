@@ -6,7 +6,6 @@ for count, game in enumerate(lines, 1):
         for key, value in hand.items():
             if value > temp[key]:
                 temp[key] = value
-    print(count, temp, [not {"red": 12, "green": 13, "blue": 14}[key] < temp[key] for key in temp.keys()])
     if all(not {"red": 12, "green": 13, "blue": 14}[key] < temp[key] for key in temp.keys()):
         total += count
 print(total)
