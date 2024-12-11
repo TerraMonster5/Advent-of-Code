@@ -1,31 +1,28 @@
-with open("input.txt", "r") as file: gates = [line.strip().split() for line in file]
+with open("input.txt", "r") as file: flip = lambda x: [x[1]]+x[:1]+x[2:]; wires = {lst[1]: int(lst[0]) if lst[0].isdigit() else lst[0].split() if len(lst[0].split()) in (1, 2) else list(map(lambda y: int(y) if y.isdigit() else y, flip(lst[0].split()))) for lst in [line.strip().split(" -> ") for line in file]}
+[print(key+" " if len(key) == 1 else key, ":", val) for key, val in sorted(wires.items(), key=lambda x: x[0])]
 
-def gate(pos: int):
-    if len(gates[pos]) == 3:
-        if gates[pos][0].isdigit():
-            return int(gates[pos][0])
-        else:
-            return gate([x[-1] for x in gates].index(gates[pos][0]))
-    elif len(gates[pos]) == 4:
-        return int(~gate([x[-1] for x in gates].index(gates[pos][1])))
-    elif len(gates[pos]) == 5:
-        match gates[pos][1]:
+def gate(loc: str) -> int:
+    val = wires[loc]
+    if isinstance(val, int):
+        return val
+    if len(val) == 1:
+        result = (gate(val[0])) & 0xFFFF
+    elif len(val) == 2:
+        result = (~gate(val[1])) & 0xFFFF
+    elif len(val) == 3:
+        op = val.pop(0)
+        match op:
             case "AND":
-                if gates[pos][0].isdigit():
-                    return int(int(gates[pos][0]) & gate([x[-1] for x in gates].index(gates[pos][2])))
-                else:
-                    return int(gate([x[-1] for x in gates].index(gates[pos][0])) & gate([x[-1] for x in gates].index(gates[pos][2])))
+                result = (gate(val[0]) & val[1] if isinstance(val[1], int) else gate(val[1])) & 0xFFFF
             case "OR":
-                return int(gate([x[-1] for x in gates].index(gates[pos][0])) | gate([x[-1] for x in gates].index(gates[pos][2])))
+                result = (gate(val[0]) | val[1] if isinstance(val[1], int) else gate(val[1])) & 0xFFFF
             case "LSHIFT":
-                return int(gate([x[-1] for x in gates].index(gates[pos][0]))<<int(gates[pos][2]))
+                result = (gate(val[0]) << val[1] if isinstance(val[1], int) else gate(val[1])) & 0xFFFF
             case "RSHIFT":
-                return int(gate([x[-1] for x in gates].index(gates[pos][0]))>>int(gates[pos][2]))
+                result = (gate(val[0]) >> val[1] if isinstance(val[1], int) else gate(val[1])) & 0xFFFF
 
-loc = 0
+    wires[loc] = result
+    return result
 
-for count, line in enumerate(gates):
-    if line[-1] == "a":
-        loc = count
-
-print(gate(loc))
+print(gate("a"))
+[print(key+" " if len(key) == 1 else key, ":", val) for key, val in sorted(wires.items(), key=lambda x: x[0])]
